@@ -9,7 +9,9 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour {
 
     public float speed = 1;
-    public float speedMulti = 100;
+    public float speedMulti = 1;
+    private bool canTravel = true;
+    private GameController gameControl;
 
     #region TouchVars
     public bool debugTouch = false;
@@ -18,9 +20,8 @@ public class CharacterController : MonoBehaviour {
     private Vector2 tch_current;
     private float touch_delta;
     #endregion
-    bool canTravel = true;
 
-    GameController gameControl;
+
 
     // Use this for initialization
     void Start () {
@@ -77,12 +78,15 @@ public class CharacterController : MonoBehaviour {
                     //Single Tap
                     if(Input.GetTouch(0).tapCount == 1)
                     {
-                        RaycastHit hit;
-                        Ray ray;
-                        ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                        if(Physics.Raycast(ray, out hit, 100.0f))
+                        if (debugTouch) Debug.Log("Tap");
+                        RaycastHit2D hit;
+
+                        //hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.zero);
+                        hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.GetTouch(0).position), 30);
+
+                        if (hit)
                         {
-                            
+                            SwipeAttack(hit);
                         }
                     }
                     //DoubleTap
@@ -100,5 +104,31 @@ public class CharacterController : MonoBehaviour {
         {
             gameControl.AddTravel(speed * speedMulti * Time.deltaTime);
         }
+    }
+
+    void SwipeAttack(RaycastHit2D pHit)
+    {
+        Debug.Log(pHit.collider.gameObject);
+        if(pHit.collider.tag == "Rat")
+        {
+            Rat clickedRat = pHit.collider.gameObject.GetComponent<Rat>();
+            clickedRat.Damage(1);
+        }
+    }
+
+    /// <summary>
+    /// Lets the cat travel towards the destination.
+    /// </summary>
+    public void StartCatTravel()
+    {
+        canTravel = true;
+    }
+
+    /// <summary>
+    /// Stops the cat from traveling any furthur.
+    /// </summary>
+    public void EndCatTravel()
+    {
+        canTravel = false;
     }
 }

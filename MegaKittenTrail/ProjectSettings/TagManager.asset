@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Rat
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 4292324559
+    locked: 0
+  - name: Player
+    uniqueID: 487164397
     locked: 0
   - name: Foreground
     uniqueID: 864418771
