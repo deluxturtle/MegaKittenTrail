@@ -15,6 +15,9 @@ public class DelayedDestroy : MonoBehaviour {
         Invoke("DestroySelf", delay);
 	}
 	
+    /// <summary>
+    /// Calls the destroy function on itself.
+    /// </summary>
     void DestroySelf()
     {
         Destroy(gameObject);

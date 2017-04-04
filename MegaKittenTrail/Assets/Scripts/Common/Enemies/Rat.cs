@@ -11,6 +11,9 @@ public class Rat : Enemy {
     public GameObject deathSprite;
     public GameObject pop;
 
+    /// <summary>
+    /// Spawns a dead mouse and a "pop" sprite.
+    /// </summary>
 	public override void Death()
     {
         Instantiate(deathSprite, transform.position, Quaternion.identity);

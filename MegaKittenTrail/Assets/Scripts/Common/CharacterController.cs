@@ -106,6 +106,10 @@ public class CharacterController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Basic Attack
+    /// </summary>
+    /// <param name="pHit">Object that was hit.</param>
     void SwipeAttack(RaycastHit2D pHit)
     {
         Debug.Log(pHit.collider.gameObject);
