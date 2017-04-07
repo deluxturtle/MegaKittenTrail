@@ -10,10 +10,10 @@ public class TileLoader : MonoBehaviour
 {
     //Holds the .xml
     public TextAsset mapInformation;
+    [HideInInspector]
     public int layerWidth;
+    [HideInInspector]
     public int layerHeight;
-    //Temp tile obj.
-    public GameObject tempCube;
     private Sprite[] sprites;
 
     // Use this for initialization
@@ -25,7 +25,7 @@ public class TileLoader : MonoBehaviour
     IEnumerator LoadMap()
     {
         yield return new WaitForEndOfFrame();
-        sprites = Resources.LoadAll<Sprite>("MegaKittenTrailSpriteSheet copy");
+        sprites = Resources.LoadAll<Sprite>("MegaKittenTrailSpriteSheet");
         XmlDocument xmlDoc = new XmlDocument();
 
         xmlDoc.LoadXml(mapInformation.text);
@@ -68,8 +68,9 @@ public class TileLoader : MonoBehaviour
                     spriteRen.sortingLayerName = layerInfo.Attributes["name"].Value;
 
                     //set parent
+                    
                     tempSprite.transform.parent = GameObject.Find(layerInfo.Attributes["name"].Value + "Layer").transform;
-                    tempSprite.tag = "Tile";
+                    //tempSprite.tag = "Tile";
 
 
                 }
