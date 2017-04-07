@@ -48,6 +48,9 @@ TagManager:
   - name: Environment
     uniqueID: 4064433301
     locked: 0
+  - name: Props
+    uniqueID: 496245901
+    locked: 0
   - name: Player
     uniqueID: 487164397
     locked: 0
