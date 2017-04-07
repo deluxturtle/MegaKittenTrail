@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 
     private float distanceTraveled = 0;
     private float curGoalDistance = 100; //Meters
+    private GameObject currentBackground; //Background contains 32 horizontal Sprites
+    private GameObject nextBackground;
 
     void Start()
     {
@@ -45,10 +47,16 @@ public class GameController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         
+        //Move Background
 
 
+    }
+
+    void MoveBackground()
+    {
 
     }
 

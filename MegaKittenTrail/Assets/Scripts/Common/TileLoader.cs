@@ -22,6 +22,10 @@ public class TileLoader : MonoBehaviour
         StartCoroutine(LoadMap());
     }
 
+    /// <summary>
+    /// Loads the maps in the resources files.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadMap()
     {
         yield return new WaitForEndOfFrame();
@@ -29,6 +33,8 @@ public class TileLoader : MonoBehaviour
         XmlDocument xmlDoc = new XmlDocument();
 
         xmlDoc.LoadXml(mapInformation.text);
+        Debug.Log(mapInformation.name);
+        GameObject block1 = new GameObject("Block1");
 
         XmlNodeList layerNames = xmlDoc.GetElementsByTagName("layer");
 
@@ -68,8 +74,8 @@ public class TileLoader : MonoBehaviour
                     spriteRen.sortingLayerName = layerInfo.Attributes["name"].Value;
 
                     //set parent
-                    
-                    tempSprite.transform.parent = GameObject.Find(layerInfo.Attributes["name"].Value + "Layer").transform;
+
+                    tempSprite.transform.parent = block1.transform;
                     //tempSprite.tag = "Tile";
 
 
