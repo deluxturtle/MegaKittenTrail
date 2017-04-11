@@ -15,25 +15,25 @@ public class TileLoader : MonoBehaviour
     [HideInInspector]
     public int layerHeight;
     private Sprite[] sprites;
+    
 
-    // Use this for initialization
-    void Start()
+    public void StartLoad()
     {
-        StartCoroutine(LoadMap());
+        //StartCoroutine(LoadMap());
+        LoadMap();
     }
 
     /// <summary>
     /// Loads the maps in the resources files.
     /// </summary>
     /// <returns></returns>
-    IEnumerator LoadMap()
+    void LoadMap()
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         sprites = Resources.LoadAll<Sprite>("MegaKittenTrailSpriteSheet");
         XmlDocument xmlDoc = new XmlDocument();
 
         xmlDoc.LoadXml(mapInformation.text);
-        Debug.Log(mapInformation.name);
         GameObject block1 = new GameObject("Block1");
 
         XmlNodeList layerNames = xmlDoc.GetElementsByTagName("layer");
@@ -65,13 +65,17 @@ public class TileLoader : MonoBehaviour
 
                     //Add the tile script here if needed
 
-                    SpriteRenderer spriteRen = tempSprite.AddComponent<SpriteRenderer>();
+                    //SpriteRenderer spriteRen = tempSprite.AddComponent<SpriteRenderer>();
+                    tempSprite.AddComponent<SpriteRenderer>();
                     //get sprite from sheet
-                    spriteRen.sprite = currentSpriteSheet[spriteValue - 1];
+                    //spriteRen.sprite = currentSpriteSheet[spriteValue - 1];
+                    tempSprite.GetComponent<SpriteRenderer>().sprite = currentSpriteSheet[spriteValue - 1];
+
                     //set position
                     tempSprite.transform.position = new Vector3((tilewidth * horizontalIndex), (tileHeight * verticalIndex));
                     //set the sorting layer
-                    spriteRen.sortingLayerName = layerInfo.Attributes["name"].Value;
+                    //spriteRen.sortingLayerName = layerInfo.Attributes["name"].Value;
+                    tempSprite.GetComponent<SpriteRenderer>().sortingLayerName = layerInfo.Attributes["name"].Value;
 
                     //set parent
 
@@ -89,5 +93,6 @@ public class TileLoader : MonoBehaviour
             }
         }
 
+        GetComponent<GameController>().levelBlocks.Add(block1);
     }
 }
