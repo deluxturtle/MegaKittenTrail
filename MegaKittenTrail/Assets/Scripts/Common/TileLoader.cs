@@ -9,7 +9,7 @@ using UnityEngine;
 public class TileLoader : MonoBehaviour
 {
     //Holds the .xml
-    public TextAsset mapInformation;
+    private TextAsset mapInformation;
     [HideInInspector]
     public int layerWidth;
     [HideInInspector]
@@ -21,6 +21,16 @@ public class TileLoader : MonoBehaviour
     {
         //StartCoroutine(LoadMap());
         LoadMap();
+    }
+
+    /// <summary>
+    /// Sets the textasset xml sheet to the provided sheet.
+    /// (Changes the xml sheet to load)
+    /// </summary>
+    /// <param name="mapInfo"></param>
+    public void SetLevel(TextAsset mapInfo)
+    {
+        mapInformation = mapInfo;
     }
 
     /// <summary>

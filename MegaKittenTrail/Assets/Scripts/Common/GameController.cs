@@ -20,6 +20,10 @@ public class GameController : MonoBehaviour {
     public float backgroundSpeed = 1;
     [HideInInspector]
     public List<GameObject> levelBlocks = new List<GameObject>();
+    [Header("Levels (XML Info)")]
+    public TextAsset Level1;
+    public TextAsset Level2;
+
 
 
     private float distanceTraveled = 0;
@@ -68,6 +72,7 @@ public class GameController : MonoBehaviour {
         }
 
         //Load Map
+        Debug.Log("Loading first map.");
         GetComponent<TileLoader>().StartLoad();
 
 
