@@ -17,28 +17,13 @@ public class TileLoader : MonoBehaviour
     private Sprite[] sprites;
     
 
-    public void StartLoad()
-    {
-        //StartCoroutine(LoadMap());
-        LoadMap();
-    }
-
-    /// <summary>
-    /// Sets the textasset xml sheet to the provided sheet.
-    /// (Changes the xml sheet to load)
-    /// </summary>
-    /// <param name="mapInfo"></param>
-    public void SetLevel(TextAsset mapInfo)
-    {
-        mapInformation = mapInfo;
-    }
-
     /// <summary>
     /// Loads the maps in the resources files.
     /// </summary>
-    /// <returns></returns>
-    void LoadMap()
+    public void LoadMap(TextAsset mapInfo)
     {
+        mapInformation = mapInfo;
+
         //yield return new WaitForEndOfFrame();
         sprites = Resources.LoadAll<Sprite>("MegaKittenTrailSpriteSheet");
         XmlDocument xmlDoc = new XmlDocument();

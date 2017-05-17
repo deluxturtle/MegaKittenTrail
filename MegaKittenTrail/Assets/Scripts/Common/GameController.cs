@@ -21,11 +21,13 @@ public class GameController : MonoBehaviour {
     [HideInInspector]
     public List<GameObject> levelBlocks = new List<GameObject>();
     [Header("Levels (XML Info)")]
-    public TextAsset Level1;
-    public TextAsset Level2;
+    [Tooltip("First level the game will load.")]
+    public TextAsset level1;
+    [Tooltip("Second Level the game will load.")]
+    public TextAsset level2;
 
 
-
+    private uint levelNumber = 1;
     private float distanceTraveled = 0;
     private float curGoalDistance = 50; //Meters
     private GameObject currentBackground; //Background contains 32 horizontal Sprites
@@ -73,7 +75,7 @@ public class GameController : MonoBehaviour {
 
         //Load Map
         Debug.Log("Loading first map.");
-        GetComponent<TileLoader>().StartLoad();
+        GetComponent<TileLoader>().LoadMap(level1);
 
 
     }
@@ -105,6 +107,8 @@ public class GameController : MonoBehaviour {
         distanceTraveled += distance;
         uiDistSlider.value = distanceTraveled;
         uiDistTraveledText.text = distanceTraveled.ToString("F");
+
+        //If complete Reset everything
         if (distanceTraveled >= curGoalDistance)
         {
             Debug.Log("Reached Goal!");
@@ -122,9 +126,20 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void _NextDestination()
     {
+        //Load new tile sheet
+        switch (levelNumber)
+        {
+            case 1:
+                GetComponent<TileLoader>().LoadMap(level2);
+                break;
+            default:
+                Debug.Log("No more levels to load");
+                break;
+        }
         //Update travel info
         //Start cat travel
         playerObj.GetComponent<CharacterController>().StartCatTravel();
         moveBackground = true;
     }
+    
 }

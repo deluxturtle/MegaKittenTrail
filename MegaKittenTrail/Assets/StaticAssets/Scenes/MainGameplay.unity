@@ -250,6 +250,8 @@ MonoBehaviour:
   playerObj: {fileID: 1241368038}
   backgroundSpeed: 1
   levelBlocks: []
+  level1: {fileID: 4900000, guid: 83eb2bac4af8e9d4f8b7044d3921c0ec, type: 3}
+  level2: {fileID: 0}
 --- !u!114 &222677666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf15301c3a820394b9fe2ad7001f97b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInformation: {fileID: 4900000, guid: 83eb2bac4af8e9d4f8b7044d3921c0ec, type: 3}
   layerWidth: 0
   layerHeight: 0
 --- !u!1 &239065547
@@ -1155,7 +1156,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 971469218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7375001, y: 3.2937498, z: 0}
+  m_LocalPosition: {x: 4.89, y: 3.2937498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 727442698}
@@ -1951,7 +1952,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Start Journey
 --- !u!222 &2044624041
 CanvasRenderer:
   m_ObjectHideFlags: 0
