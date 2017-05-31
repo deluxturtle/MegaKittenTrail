@@ -15,21 +15,34 @@ public class TileLoader : MonoBehaviour
     [HideInInspector]
     public int layerHeight;
     private Sprite[] sprites;
-    
+    GameObject spriteParent;
+
 
     /// <summary>
     /// Loads the maps in the resources files.
     /// </summary>
     public void LoadMap(TextAsset mapInfo)
     {
-        mapInformation = mapInfo;
 
         //yield return new WaitForEndOfFrame();
         sprites = Resources.LoadAll<Sprite>("MegaKittenTrailSpriteSheet");
         XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(mapInfo.text);
 
-        xmlDoc.LoadXml(mapInformation.text);
-        GameObject block1 = new GameObject("Block1");
+        if(spriteParent == null)
+        {
+            spriteParent = new GameObject("SpritesParent");
+        }
+        else
+        {
+            //Clear the sprites first and reset position
+            spriteParent.transform.position = Vector2.zero;
+            foreach(Transform child in spriteParent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
+        }
 
         XmlNodeList layerNames = xmlDoc.GetElementsByTagName("layer");
 
@@ -74,7 +87,7 @@ public class TileLoader : MonoBehaviour
 
                     //set parent
 
-                    tempSprite.transform.parent = block1.transform;
+                    tempSprite.transform.parent = spriteParent.transform;
                     //tempSprite.tag = "Tile";
 
 
@@ -88,6 +101,8 @@ public class TileLoader : MonoBehaviour
             }
         }
 
-        GetComponent<GameController>().levelBlocks.Add(block1);
+        GetComponent<GameController>().levelBlocks.Add(spriteParent);
     }
+
+
 }

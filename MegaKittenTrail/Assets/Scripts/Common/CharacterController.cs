@@ -30,6 +30,13 @@ public class CharacterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+#if UNITY_EDITOR
+#endif
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+        }
         #region TouchControls
         if(Input.touchCount == 1)
         {
