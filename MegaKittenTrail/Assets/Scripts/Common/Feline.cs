@@ -6,11 +6,23 @@ using UnityEngine;
 /// Author: Andrew Seba
 /// Description: Base class for cats.
 /// </summary>
-public class Feline : MonoBehaviour {
+public class Feline {
 
-    private int age;
+    private int age; //Weeks
     private string catName;
     private float hunger = 0.50f; //%
+
+
+    public Feline(string pName)
+    {
+        catName = pName;
+        age = 4;
+    }
+
+    public Feline(string pName, int pAge)
+    {
+        catName = pName;
+    }
 
     public float Hunger
     {
@@ -21,6 +33,18 @@ public class Feline : MonoBehaviour {
         set
         {
             hunger = value;
+        }
+    }
+
+    public string CatName
+    {
+        get
+        {
+            return catName;
+        }
+        set
+        {
+            catName = value;
         }
     }
 	

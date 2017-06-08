@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
     private GameObject nextBackground;
     private Vector3 blockRestingPlace = new Vector3(0, 100, 0);
     private bool moveBackground = true;
+    private CatManager catManager;
 
     void Start()
     {
@@ -60,7 +61,11 @@ public class GameController : MonoBehaviour {
         {
             uiDistGoalText.text = curGoalDistance.ToString();
         }
-#endregion
+        #endregion
+
+        #region ScriptReferences
+        catManager = GetComponent<CatManager>();
+        #endregion
 
         if (playerObj == null)
         {
@@ -77,6 +82,9 @@ public class GameController : MonoBehaviour {
         Debug.Log("Loading first map.");
         GetComponent<TileLoader>().LoadMap(level1);
 
+        //Initialize Cats
+
+        catManager.InitializeCaravan("Papa", "Mama");
 
     }
 
