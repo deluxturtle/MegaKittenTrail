@@ -58,5 +58,17 @@ public class CatManager : MonoBehaviour {
             i++;
         }
     }
+
+    void DayEnd()
+    {
+        foodValue -= 1;
+        if(foodValue <= 0)
+        {
+            if(foodValue < 3)
+            {
+                Debug.Log("It's been 3 days without food you all parish.");
+            }
+        }
+    }
 	
 }
