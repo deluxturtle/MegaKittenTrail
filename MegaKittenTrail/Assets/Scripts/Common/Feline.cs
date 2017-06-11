@@ -24,28 +24,8 @@ public class Feline {
         catName = pName;
     }
 
-    public float Hunger
-    {
-        get
-        {
-            return hunger;
-        }
-        set
-        {
-            hunger = value;
-        }
-    }
-
-    public string CatName
-    {
-        get
-        {
-            return catName;
-        }
-        set
-        {
-            catName = value;
-        }
-    }
+    public int Age { get { return age; } set { age = value; } }
+    public float Hunger { get { return hunger; } set { hunger = value; } }
+    public string CatName { get { return catName; } set { catName = value; } }
 	
 }

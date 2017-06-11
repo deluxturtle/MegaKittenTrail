@@ -7,26 +7,18 @@ using UnityEngine;
 /// Description: Handles player input.
 /// </summary>
 public class CharacterController : MonoBehaviour {
-
-    public float speed = 1;
-    public float speedMulti = 1;
-    private bool canTravel = true;
-    private GameController gameControl;
-
+    
     #region TouchVars
+    [Tooltip("Will print out debugs of touch positions.")]
     public bool debugTouch = false;
+    [Tooltip("Distance of finger slide for swipe to activate")]
     public int i_comfort = 3;
     private Vector2 tch_previous;
     private Vector2 tch_current;
     private float touch_delta;
     #endregion
 
-
-
-    // Use this for initialization
-    void Start () {
-        gameControl = FindObjectOfType<GameController>();
-	}
+    
 	
 	// Update is called once per frame
 	void Update () {
@@ -106,11 +98,7 @@ public class CharacterController : MonoBehaviour {
             }
         }
         #endregion
-
-        if (canTravel)
-        {
-            gameControl.AddTravel(speed * speedMulti * Time.deltaTime);
-        }
+        
     }
 
     /// <summary>
@@ -126,20 +114,5 @@ public class CharacterController : MonoBehaviour {
             clickedRat.Damage(1);
         }
     }
-
-    /// <summary>
-    /// Lets the cat travel towards the destination.
-    /// </summary>
-    public void StartCatTravel()
-    {
-        canTravel = true;
-    }
-
-    /// <summary>
-    /// Stops the cat from traveling any furthur.
-    /// </summary>
-    public void EndCatTravel()
-    {
-        canTravel = false;
-    }
+    
 }

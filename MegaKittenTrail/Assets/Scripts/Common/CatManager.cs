@@ -16,7 +16,7 @@ public class CatManager : MonoBehaviour {
     [HideInInspector]
     public int foodValue = 0;//Amount of food caravan has to live off of.
     private List<Feline> cats = new List<Feline>();
-    private bool initialized = false;
+    private bool initialized = false;//ForLoading
     
 
     /// <summary>
@@ -59,6 +59,9 @@ public class CatManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Function when the day ends to deduct food.
+    /// </summary>
     void DayEnd()
     {
         foodValue -= 1;

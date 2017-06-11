@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Author: Andrew Seba
-/// Description: Handles the UI updates and end game mechanics.
+/// Description: Handles the UI updates, traveling and end game mechanics.
+/// 
 /// </summary>
 public class GameController : MonoBehaviour {
+    [Header("Cat Move Settings")]
+    [Tooltip("How much distance is added per update.")]
+    public float speed = 1;
+    [Tooltip("Multiplaies the speed addition per update.")]
+    public float speedMulti = 1;
 
     [Header("UI Hooks")]
     public Slider uiDistSlider;
@@ -26,14 +32,12 @@ public class GameController : MonoBehaviour {
     [Tooltip("Second Level the game will load.")]
     public TextAsset level2;
 
-
+    private bool canTravel = true;//Allows the player to update the distance being traveled
     private uint levelNumber = 1;
     private float distanceTraveled = 0;
     private float curGoalDistance = 50; //Meters
     private GameObject currentBackground; //Background contains 32 horizontal Sprites
     private GameObject nextBackground;
-    private Vector3 blockRestingPlace = new Vector3(0, 100, 0);
-    private bool moveBackground = true;
     private CatManager catManager;
 
     void Start()
@@ -70,11 +74,11 @@ public class GameController : MonoBehaviour {
         if (playerObj == null)
         {
             playerObj = GameObject.FindGameObjectWithTag("Player");
-            playerObj.GetComponent<CharacterController>().StartCatTravel();
+            canTravel = true;
         }
         else
         {
-            playerObj.GetComponent<CharacterController>().StartCatTravel();
+            canTravel = true;
 
         }
 
@@ -91,11 +95,8 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
-        //Move Background
-        if(moveBackground)
-            MoveBackground();
-
+        if(canTravel)
+            AddTravel(speed * speedMulti * Time.deltaTime);
     }
 
     /// <summary>
@@ -112,20 +113,22 @@ public class GameController : MonoBehaviour {
     /// <param name="distance">How much distance to add to traveled.</param>
     public void AddTravel(float distance)
     {
-        distanceTraveled += distance;
-        uiDistSlider.value = distanceTraveled;
-        uiDistTraveledText.text = distanceTraveled.ToString("F");
-
         //If complete Reset everything
         if (distanceTraveled >= curGoalDistance)
         {
             Debug.Log("Reached Goal!");
-            moveBackground = false;
             uiLevelCompletePanel.SetActive(true);
             distanceTraveled = curGoalDistance;
             uiDistTraveledText.text = distanceTraveled.ToString("F");
-            playerObj.GetComponent<CharacterController>().EndCatTravel();
+            canTravel = false;
             distanceTraveled = 0;
+        }
+        else
+        {
+            distanceTraveled += distance;
+            uiDistSlider.value = distanceTraveled;
+            uiDistTraveledText.text = distanceTraveled.ToString("F");
+            MoveBackground();
         }
     }
 
@@ -146,8 +149,7 @@ public class GameController : MonoBehaviour {
         }
         //Update travel info
         //Start cat travel
-        playerObj.GetComponent<CharacterController>().StartCatTravel();
-        moveBackground = true;
+        canTravel = true;
     }
     
 }
