@@ -16,6 +16,8 @@ public class RatSpawner : MonoBehaviour {
     public GameObject rat;//Make it a list if there will be multiple rats.
     public Transform spawnPoint;//Place off screen to spawn rats
 
+    public GameController gameController;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -36,7 +38,7 @@ public class RatSpawner : MonoBehaviour {
     /// </summary>
     void ChanceToSpawn()
     {
-        if (rat.GetComponent<Rat>().spawnable)
+        if (rat.GetComponent<Rat>().spawnable && gameController.canTravel)
         {
             float rand = Random.Range(0, 100) / 100f;
         

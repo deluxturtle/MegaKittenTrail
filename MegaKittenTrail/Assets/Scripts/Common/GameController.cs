@@ -32,7 +32,9 @@ public class GameController : MonoBehaviour {
     [Tooltip("Second Level the game will load.")]
     public TextAsset level2;
 
-    private bool canTravel = true;//Allows the player to update the distance being traveled
+    [HideInInspector]
+    public bool canTravel = true;//Allows the player to update the distance being traveled
+
     private uint levelNumber = 1;
     private float distanceTraveled = 0;
     private float curGoalDistance = 50; //Meters
@@ -130,6 +132,14 @@ public class GameController : MonoBehaviour {
             uiDistTraveledText.text = distanceTraveled.ToString("F");
             MoveBackground();
         }
+    }
+
+    /// <summary>
+    /// Pauses travel
+    /// </summary>
+    public void StopTravel()
+    {
+        //TODO stop the travel for pausing
     }
 
     /// <summary>
