@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Author: Andrew Seba
 /// Description: Handles the UI updates, traveling and end game mechanics.
-/// 
+/// C:\Users\Andrew\AppData\Local\Android\sdk
 /// </summary>
 public class GameController : MonoBehaviour {
     [Header("Cat Move Settings")]
@@ -154,7 +154,7 @@ public class GameController : MonoBehaviour {
                 GetComponent<TileLoader>().LoadMap(level2);
                 break;
             default:
-                Debug.Log("No more levels to load");
+                Debug.LogWarning("No more levels to load");
                 break;
         }
         //Update travel info
