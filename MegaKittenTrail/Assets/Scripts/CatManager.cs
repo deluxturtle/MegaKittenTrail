@@ -12,6 +12,8 @@ public class CatManager : MonoBehaviour {
     public GameObject catPrefab;
     [Tooltip("Position cats will spawn at.")]
     public Transform catSpawn;
+    [Tooltip("How far away the cats will be from eachother at spawn.")]
+    public float catSpawnDistance = 3f;
 
     [HideInInspector]
     public int foodValue = 0;//Amount of food caravan has to live off of.
@@ -48,14 +50,23 @@ public class CatManager : MonoBehaviour {
     /// </summary>
     void SpawnCats()
     {
-        float i = 2f;
+        GameObject previousCat = null;
         foreach(Feline cat in cats)
         {
-            GameObject tempCat = Instantiate(catPrefab, catSpawn.transform.position + new Vector3(i, 0), Quaternion.identity);
+            GameObject tempCat = Instantiate(catPrefab);
+            if (previousCat == null)
+            {
+                tempCat.transform.position = catSpawn.transform.position;
+            }
+            else
+            {
+                tempCat.transform.position = previousCat.transform.position + new Vector3(catSpawnDistance, 0);
+            }
             CaravanCharacter tempCaravan = tempCat.AddComponent<CaravanCharacter>();
             tempCaravan.SetFelineData(cat);
             //Debug.Log(tempCat.GetComponent<CaravanCharacter>().felineData.CatName);
-            i++;
+
+            previousCat = tempCat;
         }
     }
 
