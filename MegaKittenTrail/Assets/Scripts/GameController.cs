@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
     public Text uiDistTraveledText;
     public Text uiDistGoalText;
     public GameObject uiLevelCompletePanel;
+    public GameObject eventDialogWindow;
+    public GameObject oKButton; //Going to assign dynamic functions to this.
     [Header("Other Hooks")]
     public GameObject playerObj;
     [Header("BackgroundSettings")]
@@ -37,13 +39,22 @@ public class GameController : MonoBehaviour {
 
     private uint levelNumber = 1;
     private float distanceTraveled = 0;
-    private float curGoalDistance = 50; //Meters
+    private float curGoalDistance = 1000; //Meters
     private GameObject currentBackground; //Background contains 32 horizontal Sprites
     private GameObject nextBackground;
     private CatManager catManager;
+    private EventDialog dialogWindowRef;
+    private UnityEngine.Events.UnityAction unPauseAction;
 
     void Start()
     {
+        #region Learning and Test
+        //Created a unityaction to assign to the button and remove when needed.
+        unPauseAction = () => { _Unpause(); };
+        //First attempt at making the dialog box function
+        dialogWindowRef = eventDialogWindow.GetComponent<EventDialog>();
+        #endregion
+
         #region UIChecks
         if (uiDistSlider == null)
         {
@@ -135,11 +146,31 @@ public class GameController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Pauses travel
+    /// Only used in game to pause the travel from the pause button.
     /// </summary>
-    public void StopTravel()
+    public void _StopTravel()
     {
-        //TODO stop the travel for pausing
+        dialogWindowRef.textBig.text = "Paused";
+        dialogWindowRef.buttonOk.GetComponentInChildren<Text>().text = "Unpause";
+        canTravel = false;
+        if (oKButton != false)
+        {
+            oKButton.GetComponent<Button>().onClick.AddListener(unPauseAction);
+        }
+        else
+        {
+            Debug.LogWarning("Default ok button on dialog box went missing!");
+        }
+    }
+
+    /// <summary>
+    /// Will be assigned to the ok button dynamicly when pausing the game.
+    /// </summary>
+    public void _Unpause()
+    {
+        canTravel = true;
+        oKButton.GetComponent<Button>().onClick.RemoveListener(unPauseAction);
+        Debug.Log("removed listener");
     }
 
     /// <summary>
