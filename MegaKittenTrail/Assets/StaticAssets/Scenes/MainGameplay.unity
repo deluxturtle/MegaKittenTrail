@@ -301,6 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catPrefab: {fileID: 1732236966133058, guid: 958c7ec5ec343444aaf5f9f369a5f0e6, type: 2}
   catSpawn: {fileID: 1323188983}
+  catSpawnDistance: 1.8
   foodValue: 0
 --- !u!1 &239065547
 GameObject:
